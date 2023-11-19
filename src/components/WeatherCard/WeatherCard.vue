@@ -111,6 +111,7 @@ const deleteFromFavHandler = () => {
 
 const isFavHandler = async () => {
   favCities.value = await getStorage('fav')
+  if(!favCities.value) return
   isFavorite.value = favCities.value.some(
     (item) => item === mainWeather.value.name
   )

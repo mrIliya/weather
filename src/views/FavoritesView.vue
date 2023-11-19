@@ -12,7 +12,7 @@ const itemToDelete = ref('')
 
 const initFavList = async () => {
   favCities.value = await getStorage('fav')
-
+  if(!favCities.value) return
   for (const city of favCities.value) {
     await weather
       .getCityWeather(city)
