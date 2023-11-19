@@ -1,4 +1,4 @@
-# panda weather
+# weather
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -43,7 +43,7 @@ npm run lint
 ### Both methods calls each time component WeatherCard mounted except when it mounted in FavoritesView, data from getUserLocation we pass in mainWeather variable.
 
 ### Weather data (https://openweathermap.org/api)
-### Most common method - getCityWeather  from (./src/api/weather.js), we call it WeatherCard from start and also when we change city using search, it requires city name, we pass name from search or from FavoritesView using props.Value from it we pass in mainWeather variable.
+### Most common method - getCityWeather  from (./src/api/weather.js), we call it in WeatherCard from start and also when we change city using search, it requires city name, we pass name from search or from FavoritesView using props.Value from it we pass in mainWeather variable.
 
 ### To get hourly weather for one day we using getData method from (./src/api/weather.js), we using it for Charts, it requires city coords from mainWeather variable.
 
