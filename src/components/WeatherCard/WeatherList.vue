@@ -1,6 +1,6 @@
 <script setup>
 import getDayOfTheWeek from '@/helpers/dayOfTheWeek'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 const props = defineProps({
   fiveDaysArray: {
     type: Array,
@@ -36,6 +36,10 @@ const renameValues = () => {
     }
   )
 }
+
+watchEffect(() => {
+  renameValues()
+})
 
 onMounted(() => {
   renameValues()
@@ -120,7 +124,7 @@ onMounted(() => {
       padding: 30px 0;
     }
 
-    &__line{
+    &__line {
       margin: 10px;
     }
   }

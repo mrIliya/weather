@@ -111,29 +111,10 @@ const deleteFromFavHandler = () => {
 
 const isFavHandler = async () => {
   favCities.value = await getStorage('fav')
-  if(!favCities.value) return
+  if (!favCities.value) return
   isFavorite.value = favCities.value.some(
     (item) => item === mainWeather.value.name
   )
-}
-
-const changeCity = async (city) => {
-  const cityWeather = await weather.getCityWeather(city)
-
-  if (cityWeather?.cod === 200) {
-    mainWeather.value = cityWeather
-    await isFavHandler()
-
-    searchError.value = {
-      error: false,
-      message: '',
-    }
-  } else {
-    searchError.value = {
-      error: true,
-      message: cityWeather.response.data.message,
-    }
-  }
 }
 
 const toFavorites = async () => {
@@ -217,6 +198,25 @@ const getFiveDaysHandler = async () => {
   oneDayState.value = false
 }
 
+const changeCity = async (city) => {
+  const cityWeather = await weather.getCityWeather(city)
+
+  if (cityWeather?.cod === 200) {
+    mainWeather.value = cityWeather
+    await isFavHandler()
+    if (fiveDaysState.value) await getFiveDaysHandler()
+    searchError.value = {
+      error: false,
+      message: '',
+    }
+  } else {
+    searchError.value = {
+      error: true,
+      message: cityWeather.response.data.message,
+    }
+  }
+}
+
 const getOneDayHandler = () => {
   fiveDaysWeather.value = []
   initChart()
@@ -229,12 +229,11 @@ const initCard = async () => {
     if (!props.city) {
       const ipAdress = await userIP.getUserIP()
       const location = await userIP.getUserLocation(ipAdress)
-      if (ipAdress && location.city){
+      if (ipAdress && location.city) {
         mainWeather.value = await weather.getCityWeather(location.city)
-      }else{
+      } else {
         mainWeather.value = await weather.getCityWeather('London')
       }
-        
     } else {
       mainWeather.value = await weather.getCityWeather(props.city)
     }
@@ -314,7 +313,9 @@ onMounted(async () => {
 
     <div class="weather__content">
       <WeatherList
-        v-if="mainWeather && Object.keys(mainWeather)?.length > 0"
+        v-if="
+          fiveDaysWeather?.length > 0 || Object.keys(mainWeather)?.length > 0
+        "
         :five-days-array="fiveDaysWeather"
         :one-day-object="mainWeather"
       />
