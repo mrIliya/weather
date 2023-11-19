@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    outline: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.daylight0 {
+    --clr-bg: #fff;
+    --text-main: #000;
+}
+
+.moonlight0 {
+    --clr-bg: rgba(10, 18, 36, 0.8);
+    --text-main: #fff;
+}
+
+body {
+    background-color: var(--clr-bg);
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    color: var(--text-main);
+    overflow-x: hidden;
+    margin: 0;
+
+    &.lock {
+        overflow: hidden;
+    }
+}
